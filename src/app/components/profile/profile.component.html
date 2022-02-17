@@ -1,0 +1,17 @@
+<div class="wrapper">
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <h3>Profile</h3>
+
+    <label for="username">Username</label>
+    <input type="text" placeholder="Username" id="username" formControlName="username">
+
+    <label for="email">Email</label>
+    <input type="text" placeholder="Email" id="email" formControlName="email">
+
+    <label for="age">Age</label>
+    <input type="text" placeholder="Age" id="age" formControlName="age">
+
+    <button type="submit" [disabled]="!profileForm.valid">Save</button>
+
+
+  </form>

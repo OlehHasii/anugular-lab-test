@@ -1,0 +1,22 @@
+<div class="spinner" *ngIf="isLoading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="alert" *ngIf="error">
+  <p>{{error}}</p>
+</div>
+<div class="wrapper">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+    <h3>Sign In</h3>
+
+    <label for="email">Email</label>
+    <input type="text" placeholder="Email" id="email" formControlName="email">
+
+    <label for="password">Password (at least 6 characters)</label>
+    <input type="password" placeholder="Password" id="password" formControlName="password">
+
+    <button type="submit" [disabled]="!loginForm.valid" (click)="onSignInMode()">Sign In</button>
+    <button type="submit" [disabled]="!loginForm.valid" (click)="onSignUpMode()">Sign Up</button>
+
+  </form>
+
+</div>
