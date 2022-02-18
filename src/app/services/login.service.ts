@@ -83,7 +83,9 @@ export class LoginService {
   ) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
-    this.user.next(user);
+    sessionStorage.setItem('user', JSON.stringify(user));
+    this.user.next(JSON.parse(sessionStorage.getItem('user')));
+    //this.user.next(user);
     this.userEmail = email;
   }
 

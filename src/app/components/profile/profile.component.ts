@@ -34,12 +34,23 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.profileService.getProfile().subscribe((respone) => {
-      this.profileForm.setValue({
-        ...respone,
+    const sessUser = JSON.parse(sessionStorage.getItem('user'));
+    if (sessUser) {
+      this.profileService.getProfile().subscribe((respone) => {
+        this.profileForm.setValue({
+          ...respone,
+        });
+        console.log(respone);
       });
-      console.log(respone);
-    });
+    }
+    /*  if (sessionStorage.getItem('user')) {
+      this.profileService.getProfile().subscribe((respone) => {
+        this.profileForm.setValue({
+          ...respone,
+        });
+        console.log(respone);
+      });
+    } */
   }
 
   onSubmit() {

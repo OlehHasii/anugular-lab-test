@@ -15,8 +15,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loginService.user.subscribe((user) => {
-      this.isLogged = !user ? false : true;
-      localStorage.clear();
+      // this.isLogged = !user ? false : true;
+      this.isLogged = !JSON.parse(sessionStorage.getItem('user'))
+        ? false
+        : true;
     });
   }
 

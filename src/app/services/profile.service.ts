@@ -27,7 +27,7 @@ export class ProfileService {
     );
   }
   getProfile() {
-    return this.loginService.user.pipe(
+    /* return this.loginService.user.pipe(
       take(1),
       exhaustMap((user) => {
         return this.http
@@ -41,6 +41,12 @@ export class ProfileService {
             })
           );
       })
+    ); */
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    console.log(user);
+    return this.http.get(
+      `https://angular-lab-final-default-rtdb.europe-west1.firebasedatabase.app/profileData${user.id}.json`,
+      { params: new HttpParams().set('auth', user._token) }
     );
   }
 }
