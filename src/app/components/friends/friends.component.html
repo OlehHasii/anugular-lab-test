@@ -1,1 +1,39 @@
-<p>friends works!</p>
+<section class="friends">
+    <h3 class="friends__title">Friends</h3>
+    <label class="friends__label" for="search">Search friends</label>
+    <div class="search">
+        <input 
+            class="search__input"
+            #search 
+            type="text" 
+            placeholder="Search friends" 
+            name="search">
+        <button 
+            class="search__btn" 
+            (click)="onSearch()">Search
+        </button>
+    </div>
+    <div *ngIf="visibleFriends; else elseBlock">
+        <h3 class="friends__title">My Friends</h3>
+        <div *ngFor="let friend of friends">
+            <app-friend-item 
+                [user]="friend" 
+                [buttonText]="'Remove Friend'" 
+                [buttonClass]="visibleFriends"
+                (btnClick)="removeFriend($event)">
+            </app-friend-item>
+        </div>
+    </div>
+    <ng-template #elseBlock>
+        <h3 class="friends__title">Search Friends: {{textFragment}}</h3>
+        <div *ngFor="let user of filteredUsers">
+            <app-friend-item 
+                [user]="user" 
+                [buttonText]="'Add Friend'" 
+                [buttonClass]="visibleFriends"
+                (btnClick)="addFriend($event)">
+            </app-friend-item>
+        </div>
+    </ng-template>
+</section>
+

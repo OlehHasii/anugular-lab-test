@@ -1,0 +1,27 @@
+.user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    margin-top: 28px;
+}
+
+.user__btn--remove {
+    background-color: #FF6F6F;
+}
+
+.user__btn--add {
+    background-color: #6C69FF;
+}
+
+.user__btn {
+    padding: 8px 16px;
+    color: white;
+    border: none;
+}
+
+.user__btn,
+.user {
+    box-shadow: 0px 0px 4px 0px #00000040;
+    border-radius: 4px;
+}

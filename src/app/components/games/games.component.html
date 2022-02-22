@@ -1,1 +1,32 @@
-<p>games works!</p>
+<div class="wrapper">
+    <h2>Games</h2>
+
+
+    <div class="search-game">
+      <div>
+        <label for="search">Search Games</label>
+        <input type="text" placeholder="Search friends" name="search" id="search">
+        <button class="btn-search">Search</button>
+      </div>
+    </div>
+    <div class="games">
+      <h3>Featured Games</h3>
+      <div class="games__card">
+        <app-game-card *ngFor="let game of games; let i = index;" [game]="game"></app-game-card>
+      </div>
+    </div>
+    <div class="filters">
+      <div class="price">
+        <label for="range">Filter by price</label>
+        <input class="range" type="range" name="range" value="0" min="0" max="1000">
+      </div>
+      <div class="tags">
+          <input type="checkbox" name="indie">
+          <label for="indie">Indie</label>
+      </div>
+    </div>
+</div>
+
+
+
+

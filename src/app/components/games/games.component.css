@@ -1,0 +1,93 @@
+.wrapper {
+  width: 1200px;
+  background-color: #fff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  margin: 0 auto;
+  margin-top: 64px;
+}
+
+h2 {
+  padding: 20px 60px;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: #000000;
+}
+.search-game {
+  margin-left: 60px;
+}
+
+.games {
+  margin-top: 20px;
+  margin-left: 60px;
+}
+
+.games__card {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28px;
+
+  color: #000000;
+}
+
+label {
+  display: block;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  margin-bottom: 2px;
+  color: #000000;
+}
+
+input#search {
+  height: 32px;
+  width: 997px;
+  left: 0px;
+  top: 18px;
+  border-radius: 4px;
+  padding: 8px;
+  border: 0, 5px solid #000000;
+  box-shadow: 0px 0px 4px 0px #00000040;
+}
+
+.btn-search {
+  height: 32px;
+  width: 75px;
+  left: 1005px;
+  top: 18px;
+  border-radius: 4px;
+  margin-left: 8px;
+  background-color: #6c69ff;
+  border: none;
+  color: #fff;
+  box-shadow: 0px 0px 4px 0px #00000040;
+}
+
+/* The slider itself */
+.range {
+  width: 147px;
+  height: 6px;
+  -webkit-appearance: none;
+  background: #6c69ff;
+  outline: none;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}

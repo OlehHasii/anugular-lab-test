@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
       ])
     ),
   });
+  editMode = false;
 
   constructor(
     private loginService: LoginService,
@@ -34,27 +35,29 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const sessUser = JSON.parse(sessionStorage.getItem('user'));
-    if (sessUser) {
+    //const localUser = JSON.parse(sessionStorage.getItem('userData'));
+    const localUser = this.loginService.user;
+    if (localUser) {
       this.profileService.getProfile().subscribe((respone) => {
-        this.profileForm.setValue({
-          ...respone,
-        });
-        console.log(respone);
+        if (respone) {
+          this.profileForm.setValue({
+            ...respone,
+          });
+        }
       });
     }
-    /*  if (sessionStorage.getItem('user')) {
-      this.profileService.getProfile().subscribe((respone) => {
-        this.profileForm.setValue({
-          ...respone,
-        });
-        console.log(respone);
-      });
-    } */
+    this.profileForm.disable();
+
+    this.profileService.profUser.subscribe();
   }
 
   onSubmit() {
     this.profileService.saveProfile(this.profileForm.value).subscribe();
-    console.log(this.profileForm.value);
+    this.editMode = false;
+    this.profileForm.disable();
+  }
+  onEditMode() {
+    this.editMode = true;
+    this.profileForm.enable();
   }
 }

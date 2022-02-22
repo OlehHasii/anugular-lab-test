@@ -9,7 +9,11 @@ import { LoginService } from 'src/app/services/login.service';
 export class HeaderComponent implements OnInit {
   myImage: string = 'assets/images/steam-seeklogo.com 1.png';
 
-  constructor() {}
+  constructor(private loginService: LoginService) {}
 
   ngOnInit(): void {}
+
+  onLogout() {
+    this.loginService.logout();
+  }
 }

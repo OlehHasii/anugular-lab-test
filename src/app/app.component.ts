@@ -10,19 +10,18 @@ import { LoginService } from './services/login.service';
 export class AppComponent implements OnInit, OnDestroy {
   title = 'angular-lab-final';
   isLogged = false;
-
+  userSub: Subscription;
   constructor(private loginService: LoginService) {}
 
   ngOnInit(): void {
-    this.loginService.user.subscribe((user) => {
-      // this.isLogged = !user ? false : true;
-      this.isLogged = !JSON.parse(sessionStorage.getItem('user'))
-        ? false
-        : true;
+    this.loginService.autoLogin();
+    this.userSub = this.loginService.user.subscribe((user) => {
+      this.isLogged = !user ? false : true;
     });
   }
 
   ngOnDestroy(): void {
-    //this.userSub.unsubscribe();
+    this.userSub.unsubscribe();
+    sessionStorage.clear();
   }
 }

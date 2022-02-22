@@ -1,0 +1,10 @@
+<div class="game-card">
+  <div class="game-card__title">
+    <h3>{{game.name}}</h3>
+    <span class="game-card__title_price">{{game.price}} UAH</span>
+  </div>
+  <div class="game-card__details">
+    <p class="game-card__details_desc">{{game.description}}</p>
+    <button class="game-card__details_btn" (click)="onAddGame(game)">Add to Library</button>
+  </div>
+</div>

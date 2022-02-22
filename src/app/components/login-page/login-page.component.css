@@ -57,8 +57,9 @@ input.ng-invalid.ng-touched {
 span {
   display: block;
   padding-top: 20px;
-  padding-left: 10px;
+  padding-left: 45px;
   font-size: 13px;
+  color: lightcoral;
 }
 
 .spinner {
@@ -78,4 +79,16 @@ span {
 .alert p {
   display: block;
   padding-top: 20px;
+}
+
+.signUp {
+  width: 200px;
+  height: 32px;
+  margin: 30px 60px 0px 60px;
+
+  background: none;
+  box-shadow: none;
+  border: none;
+  color: #000;
+  cursor: pointer;
 }

@@ -6,7 +6,7 @@
 </div>
 <div class="wrapper">
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
-    <h3>Sign In</h3>
+    <h3>{{signUpMode? 'Sign Up':'Sign In'}}</h3>
 
     <label for="email">Email</label>
     <input type="text" placeholder="Email" id="email" formControlName="email">
@@ -14,9 +14,10 @@
     <label for="password">Password (at least 6 characters)</label>
     <input type="password" placeholder="Password" id="password" formControlName="password">
 
-    <button type="submit" [disabled]="!loginForm.valid" (click)="onSignInMode()">Sign In</button>
-    <button type="submit" [disabled]="!loginForm.valid" (click)="onSignUpMode()">Sign Up</button>
-
+    <button type="submit" [disabled]="!loginForm.valid" (click)="onSignInMode()" *ngIf="!signUpMode">Sign In</button>
+    <button type="submit" [disabled]="!loginForm.valid" (click)="onSignUpMode()" *ngIf="signUpMode">Sign Up</button>
+    <span *ngIf="!loginForm.valid && loginForm.touched">Please provide valid email and password</span>
+    <button class="signUp" (click)="onSignUp()" *ngIf="!signUpMode"><a>Dont have an account?</a></button>
   </form>
 
 </div>

@@ -9,6 +9,8 @@ import {
   throwError,
 } from 'rxjs';
 import { User } from '../shared/user.model';
+import { Router } from '@angular/router';
+import { ProfileService } from './profile.service';
 
 export interface AuthResponseData {
   idToken: string;
@@ -25,8 +27,10 @@ export interface AuthResponseData {
 export class LoginService {
   user = new BehaviorSubject<User>(null);
   userEmail: string = '';
+  userData: User;
 
-  constructor(private http: HttpClient) {}
+  private tokenExpirationTimer: any;
+  constructor(private http: HttpClient, private router: Router) {}
 
   sigup(email: string, password: string) {
     return this.http
@@ -74,6 +78,51 @@ export class LoginService {
       );
   }
 
+  autoLogin() {
+    const userData: {
+      email: string;
+      id: string;
+      _token: string;
+      _tokenExpirationDate: string;
+    } = JSON.parse(sessionStorage.getItem('userData'));
+    if (!userData) {
+      return;
+    }
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+      const expirationDate =
+        new Date(userData._tokenExpirationDate).getTime() -
+        new Date().getTime();
+      this.autoLogout(expirationDate);
+    }
+  }
+
+  logout() {
+    this.user.next(null);
+    sessionStorage.clear();
+    console.log(sessionStorage.getItem('user'));
+
+    this.router.navigate(['/']);
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+    }
+    this.tokenExpirationTimer = null;
+    this.userData = null;
+  }
+
+  autoLogout(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+      this.logout();
+    }, expirationDuration);
+  }
+
   // function to create a new User
   private handleAuthentication(
     email: string,
@@ -83,10 +132,13 @@ export class LoginService {
   ) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
-    sessionStorage.setItem('user', JSON.stringify(user));
-    this.user.next(JSON.parse(sessionStorage.getItem('user')));
-    //this.user.next(user);
+
+    this.user.next(user);
+    sessionStorage.setItem('userData', JSON.stringify(user));
+    this.autoLogout(expiresIn * 1000);
     this.userEmail = email;
+
+    this.userData = user;
   }
 
   //Handling errors when user sign in or sign up
